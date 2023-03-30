@@ -109,5 +109,8 @@ function getMessage(player, total, dealer){
     else if (decision == "S"){
         return "Stand"
     }
+    if (player.length > 2){
+        return "Hit"
+    }
     return "Double Down"
 }
