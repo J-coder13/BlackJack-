@@ -3,10 +3,11 @@ var serveStatic = require('serve-static');
 app = express();
 app.get('/strategy.csv', (req, res) => {
   strategy_card =[]
+  count = 0;
   const fs = require('fs')
   const content = fs.readFileSync('Blackjack Strategy Table.csv', 'utf-8')
-  
-  content.split("\r\n").forEach((line) => {
+  content.split("\n").forEach((line) => {
+    count+= 1;
       if (line.split(",").length > 11){
         array = line.split(",")
         var newarray = []
