@@ -289,8 +289,8 @@ function displayBetChips(){
   }
 }
 function viewRules(){
-  disctx.drawImage(miscImgMap.get('Rules'),cWidth*.65,cHeight/10,cWidth*.3,cHeight*.85);
-  disctx.drawImage(miscImgMap.get('CardValues'),cWidth*.025,cHeight/10,cWidth*.3,cHeight*.85);
+  disctx.drawImage(miscImgMap.get('CardValues'),cWidth*.65,cHeight/10,cWidth*.3,cHeight*.85);
+  disctx.drawImage(miscImgMap.get('Rules'),cWidth*.025,cHeight/10,cWidth*.3,cHeight*.85);
 }
 
 function drawChips(h=0,bet=null,loc=null,cvs=bctx,disVal=true){
