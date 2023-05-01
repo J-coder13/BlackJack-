@@ -51,9 +51,9 @@ function newGame(){
       //checkingCard = true;
       glassBtnCanvas.style.zIndex = -1;
       drawButtons();
-    }else if(exposedCardVal=='1'){
+    }/*else if(exposedCardVal=='1'){
       checkDealerBlackJack();
-    }
+    }*/
     else{
       playingGame = true;
       checkBlackJack(pHand)
@@ -86,7 +86,7 @@ function checkDealerBlackJack(cb=()=>{}){
   drawButtons();
   let wait = 20;
   let reveal = false;
-  if(dHand.value==21){reveal = true;}
+  /*if(dHand.value==21){reveal = true;}*/
 
   //Animation
   revealDealerCard(reveal,()=>{
@@ -215,6 +215,7 @@ function discard(){
   strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   ctx.clearRect(0,0,cWidth,cHeight);//clears all drawn cards
   anictx.clearRect(0,0,cWidth,cHeight);
+  bctx.clearRect(0,0,cWidth,cHeight);
   displayedStrat = false
   let rate = 60;
   let wait = Math.floor(rate/6);

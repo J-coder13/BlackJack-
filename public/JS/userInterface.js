@@ -182,7 +182,6 @@ btnCanvas.addEventListener('click', function(evt){
               rebet=false;
               pHand.bet = account.bet = 0;
               bctx.clearRect(0,0,cWidth,cHeight);
-              anictx.clearRect(0,0, cWidth, cHeight)
               drawPlayBetBtns();
             }
           }
