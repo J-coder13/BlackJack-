@@ -37,6 +37,7 @@ function playerBJ(i,cvs,cb=()=>{}){
     drawChips(i,win,chipLoc)
     slideChipStack(i,cvs,chipLoc,0,0,-chipLoc,yLocPlayer,()=>{
       bctx.clearRect(chipLoc,0,chipW,cHeight);
+      anictx.clearRect(0,0, cWidth, cHeight)
     },()=>{
       cb();
     },win,globalWait);
@@ -57,6 +58,7 @@ function playerWins(i,cvs,cb=()=>{}){
     drawChips(i,win,chipLoc)
     slideChipStack(0,cvs,chipLoc,0,0,-chipLoc,yLocPlayer,()=>{
       bctx.clearRect(chipLoc,0,chipW,cHeight);
+      
     },()=>{
       cb();
     },win,globalWait);

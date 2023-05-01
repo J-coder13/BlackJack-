@@ -175,6 +175,7 @@ function split(){
 
     ctx.clearRect(0,cHeight/2,cWidth,cHeight/2);//clear card images
     bctx.clearRect(0,0,cWidth,cHeight);//clears chips stacks
+    anictx.clearRect(0,0, cWidth, cHeight)
     displayBalance();
 
   }else{console.log("can't split")}

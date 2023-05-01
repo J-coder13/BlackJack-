@@ -24,7 +24,7 @@ btnCanvas.addEventListener('click', function(evt){
       }else if(isInside(mousePos,optionButtonsMap.get('No'))){
         gctx.clearRect(0,0,cWidth,cHeight);
         console.log('no clicked');
-        checkDealerBlackJack();
+        //checkDealerBlackJack();
       }
     }else{
       gctx.clearRect(0,cHeight*0.3,cWidth,cHeight*0.6);//in case insufficient balance is displayed
@@ -170,7 +170,7 @@ btnCanvas.addEventListener('click', function(evt){
                 if(checkBalance(newBet)==true){
                   pHand.bet = account.bet = newBet;
                   aniLib.slide(chipImgMap.get(chip.s),chip.x,cHeight,cWidth/2-cardW,chipYLoc,chipW,chipH,25,0,bctx,()=>{
-                    bctx.clearRect(cWidth/2-cardW-1,0,chipW+2,cHeight);//clears edge case
+                    bctx.clearRect(cWidth/2-cardW-1,0,cWidth,cHeight);//clears edge case
                     drawChips();
                   });
                 }
@@ -182,6 +182,7 @@ btnCanvas.addEventListener('click', function(evt){
               rebet=false;
               pHand.bet = account.bet = 0;
               bctx.clearRect(0,0,cWidth,cHeight);
+              anictx.clearRect(0,0, cWidth, cHeight)
               drawPlayBetBtns();
             }
           }

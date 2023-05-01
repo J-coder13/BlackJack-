@@ -77,6 +77,7 @@ function checkBlackJack(hand,playingHand=true){//players hand only
     if(playingHand){stand();}
   }
   drawButtons();
+  //bctx.clearRect(0,0,cWidth,cHeight);
 }
 
 function checkDealerBlackJack(cb=()=>{}){
@@ -145,7 +146,7 @@ function dealerAction(){
   })
   //dealer hits on less than 17 and soft 17
   function dealerHit(){
-    if((dHand.value<17 && pHand.value <= 21)||(dHand.value==17&&dHand.numAces>0 && pHand.value <= 21) ){
+    if((dHand.value<17 && pHand.value <= 21 && pHand.surrendered != true)||(dHand.value==17&&dHand.numAces>0 && pHand.value <= 21 &&pHand.surrendered != true)){
       hit(dHand,0,0,true,()=>{
         displayDValue();
         dealerHit();
@@ -194,7 +195,6 @@ function findWinner(){
       dealerWins(i,chipctx);
       losses+=1
     }
-    console.log("Wins: ", wins, "\nLosses: ", losses, "\nPushes: ", pushes)
     //Need to remove canvases when done;
     if(i==(n-1)){
       aniLib.wait(globalRate*3,()=>{
@@ -214,6 +214,7 @@ function discard(){
   strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
   strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   ctx.clearRect(0,0,cWidth,cHeight);//clears all drawn cards
+  anictx.clearRect(0,0,cWidth,cHeight);
   displayedStrat = false
   let rate = 60;
   let wait = Math.floor(rate/6);

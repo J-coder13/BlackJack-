@@ -48,7 +48,7 @@ function revealDealerCard(reveal,cb=()=>{},wait=0){
             disctx.clearRect(0,0,cWidth,cHeight);//clears initial drawn exposed card
             strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
             strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
-            strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
+          strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
             cb();
           });//end slide2
         })//end flip
