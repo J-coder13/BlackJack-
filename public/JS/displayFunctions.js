@@ -162,7 +162,7 @@ const btnSize = Math.floor(btncHeight*0.6),
   const vertGap = btncHeight/20;
 
   optionButtonsMap.set("Play",{img:'RedButtonMain',x:cWidth/2-1.5*btnSize, y:vertGap, w:3*btnSize, h:btncHeight*0.4});
-  optionButtonsMap.set("Reveal Card",{img:'RedCircle',x:(cWidth/1.9+1.5*btnSize)*1.55, y:btnYPos, w:btnSize, h:btnSize});
+  optionButtonsMap.set("Reveal Card",{img:'RedCircle',x:/*(cWidth/1.9+1.5*btnSize)*1.55*/cWidth*.925, y:btnYPos, w:btnSize, h:btnSize});
   optionButtonsMap.set("Strategy Card",{img:'RedButtonMain',x:cWidth/1.9+1.5*btnSize, y:btnYPos*1.5, w:2*btnSize, h:btncHeight*0.4});
   optionButtonsMap.set("Clear Bet",{img:'RedButtonMain',x:cWidth/2-1.5*btnSize, y:btncHeight/2, w:3*btnSize, h:btncHeight*0.4});
   optionButtonsMap.set("Double",{img:'BlueCircle',x:cWidth/2+btnSize, y:btnYPos, w:btnSize, h:btnSize});
