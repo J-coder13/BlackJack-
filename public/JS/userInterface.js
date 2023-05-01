@@ -1,5 +1,5 @@
 "use strict";
-
+var rules = false
 function getMousePos(cvn, evt){
   var rect = cvn.getBoundingClientRect();
   return{
@@ -116,6 +116,11 @@ btnCanvas.addEventListener('click', function(evt){
           //options for new hand
           if(isInside(mousePos,optionButtonsMap.get('Play'))&&account.bet>=minBet){
             if(checkBalance(account.bet)){
+              disctx.clearRect(0,0,cWidth,cHeight);
+              strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+              strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+              strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
+              rules = false
               glassBtnCanvas.style.zIndex = 99;
               playingGame = true;
               if(rebet===true){rebetChip(()=>{ ctx.clearRect(0,0,cWidth,cHeight); newGame();});}
@@ -136,13 +141,26 @@ btnCanvas.addEventListener('click', function(evt){
             }
             drawPlayBetBtns()
           } else if(isInside(mousePos, optionButtonsMap.get("Reveal Card"))){
-            //Should Reveal Strategy Card TODO
+            //Should View Rules
+            console.log(rules)
+            if (rules == true){
+              disctx.clearRect(0,0,cWidth,cHeight);
+              rules = false
+              strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+              strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+              strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
+              
+              drawChipButtons();
+            }else{
+              viewRules()
+              rules = true
+            }
             
           }else if(rebet===false){
             if(isInside(mousePos,optionButtonsMap.get('Clear Bet'))){
               pHand.bet = account.bet=0;
               bctx.clearRect(0,0,cWidth,cHeight);
-              drawPlayBetBtns();
+              drawPlayBetBtns()
             }
             //Changes bet based on chips selected
             chipBtnMap.forEach(chip=>{

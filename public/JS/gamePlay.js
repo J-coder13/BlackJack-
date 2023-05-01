@@ -1,5 +1,8 @@
 "use strict";
 
+let wins = 0
+let losses = 0
+let pushes = 0
 let pHandsArr = [];
 let curHand = 0;
 let hasSplit = false;
@@ -45,7 +48,7 @@ function newGame(){
     let exposedCardVal = dHand.cards[1][0];
     if(exposedCardVal=='A'){
       insuranceOpt = true;
-      checkingCard = true;
+      //checkingCard = true;
       glassBtnCanvas.style.zIndex = -1;
       drawButtons();
     }else if(exposedCardVal=='1'){
@@ -78,7 +81,7 @@ function checkBlackJack(hand,playingHand=true){//players hand only
 
 function checkDealerBlackJack(cb=()=>{}){
   insuranceOpt = false;
-  checkingCard = true;
+  //checkingCard = true;
   drawButtons();
   let wait = 20;
   let reveal = false;
@@ -142,13 +145,13 @@ function dealerAction(){
   })
   //dealer hits on less than 17 and soft 17
   function dealerHit(){
-    if(dHand.value<17||(dHand.value==17&&dHand.numAces>0)){
+    if((dHand.value<17 && pHand.value <= 21)||(dHand.value==17&&dHand.numAces>0 && pHand.value <= 21) ){
       hit(dHand,0,0,true,()=>{
         displayDValue();
         dealerHit();
       },disctx);
     }else{
-      findWinner();
+      findWinner()
     }
   }
 }
@@ -169,21 +172,29 @@ function findWinner(){
     if(hand.surrendered){
       console.log('surrendered');
       dealerWins(i,chipctx);
+      losses += 1
     }else if(hand.blackJack){
       playerBJ(i,chipctx);
+      wins += 1
     }else if(pValue>21){
       console.log('Player busts')
       dealerWins(i,chipctx);
+      losses +=1
     }else if(pValue>dValue&&pValue<22){
       playerWins(i,chipctx);
+      wins += 1
     }else if(pValue<22&&dValue>21){
       console.log('Dealer busts.');
       playerWins(i,chipctx);
+      wins += 1
     }else if(pValue===dValue){
       push(i,chipctx);
+      pushes +=1
     }else{
       dealerWins(i,chipctx);
+      losses+=1
     }
+    console.log("Wins: ", wins, "\nLosses: ", losses, "\nPushes: ", pushes)
     //Need to remove canvases when done;
     if(i==(n-1)){
       aniLib.wait(globalRate*3,()=>{
@@ -199,6 +210,9 @@ function findWinner(){
 function discard(){
   gctx.clearRect(0,0,cWidth,cHeight);
   disctx.clearRect(0,0,cWidth,cHeight);//clears points and pointer
+  strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+  strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+  strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   ctx.clearRect(0,0,cWidth,cHeight);//clears all drawn cards
   displayedStrat = false
   let rate = 60;

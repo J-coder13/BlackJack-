@@ -1,7 +1,7 @@
 "use strict";
 
 const cWidth = Math.floor(window.innerWidth*0.98),
-  cHeight = Math.floor(cWidth*0.55);
+  cHeight = Math.floor(window.innerHeight*.82);
 
 let xMargin = 0;
 let yTop = 0;
@@ -83,7 +83,7 @@ const cutCard = 23;
 const pHandXDif = Math.floor(cWidth/(splitUpTo+1)),
   pHandYDif = Math.floor(cHeight/20);
 
-const cardW = Math.floor(cWidth/10),
+const cardW = Math.floor(cWidth/12),
   cardH = Math.floor(cardW*1.5);
 
 const pHandXLocs = [],//used for splitting
@@ -93,7 +93,7 @@ const cardPicLoc = "./Images/Cards/";
 const picLoc = "./Images/Misc/";
 const cardImgMap = new Map(),
   miscImgMap = new Map();
-const pics = ['GreenFelt.jpg','DownArrowPointer.png','WhiteRabbitBack.png'];
+const pics = ['GreenFelt.jpg','DownArrowPointer.png','WhiteRabbitBack.png', 'Rules.jpg', 'CardValues.jpg'];
 const btnPics = [];
 const cardSuits = ['C','S','D','H'];
 const numDecks = 6;

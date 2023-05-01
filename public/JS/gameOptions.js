@@ -89,6 +89,9 @@ function insurance(){
 function split(){
   glassBtnCanvas.style.zIndex = 99;
   disctx.clearRect(0,cHeight*0.9,cWidth,cHeight*0.1);//clears pValue
+  strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+  strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+  strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   gctx.clearRect(0,0,cWidth,cHeight);
 
   const rate = globalRate;

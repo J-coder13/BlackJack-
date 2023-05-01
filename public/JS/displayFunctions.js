@@ -82,7 +82,7 @@ Promise.all(promiseButtonsImgArr.concat(promiseChipSideViewImgArr).concat(promis
     strokeAndFillText(gctx,'Click Start to Begin',cWidth/2,(cHeight/2)*1.5,cWidth*0.9);
     gctx.font = gctx.font = Math.floor(cHeight/6)+"px TheBlacklist";
     setBtnCtxProps();
-    BTNctx.font = btncHeight/5 +'px Chela';
+    BTNctx.font = btncHeight/3 +'px Chela';
     drawBtnImg('Play');
     writeBtnMsg('Play', 'Start')
     /*displayBalance();
@@ -162,7 +162,7 @@ const btnSize = Math.floor(btncHeight*0.6),
   const vertGap = btncHeight/20;
 
   optionButtonsMap.set("Play",{img:'RedButtonMain',x:cWidth/2-1.5*btnSize, y:vertGap, w:3*btnSize, h:btncHeight*0.4});
-  optionButtonsMap.set("Reveal Card",{img:'RedCircle',x:(cWidth/1.9+1.5*btnSize)*1.47, y:btnYPos, w:btnSize, h:btnSize});
+  optionButtonsMap.set("Reveal Card",{img:'RedCircle',x:(cWidth/1.9+1.5*btnSize)*1.55, y:btnYPos, w:btnSize, h:btnSize});
   optionButtonsMap.set("Strategy Card",{img:'RedButtonMain',x:cWidth/1.9+1.5*btnSize, y:btnYPos*1.5, w:2*btnSize, h:btncHeight*0.4});
   optionButtonsMap.set("Clear Bet",{img:'RedButtonMain',x:cWidth/2-1.5*btnSize, y:btncHeight/2, w:3*btnSize, h:btncHeight*0.4});
   optionButtonsMap.set("Double",{img:'BlueCircle',x:cWidth/2+btnSize, y:btnYPos, w:btnSize, h:btnSize});
@@ -194,16 +194,17 @@ function drawBtnImg(name, propMap=optionButtonsMap, imgMap=buttonsImgMap, ctx=BT
 }
 
 function clearTutorialBtn(){
-  BTNctx.clearRect((cWidth/1.9+1.5*btnSize)+15,50,(btnSize*2),btncHeight);
+  BTNctx.clearRect((cWidth/1.9+(1.7*btnSize)),cHeight/17,(btnSize*2),btncHeight);
 }
 function drawPlayBetBtns(){
   
   let fontSize = btncHeight/5;
   BTNctx.font = fontSize+'px Chela';
-  BTNctx.clearRect(cWidth/2-btnSize*2,0,btnSize*5,btncHeight);
+  //BTNctx.clearRect(cWidth/2-btnSize*2,0,btnSize*5,btncHeight);
   drawBtnImg('Strategy Card'); 
   drawBtnImg('Play'); drawBtnImg('Clear Bet');
   BTNctx.font = fontSize+12+'px Chela';
+  
   
   if(account.bet<minBet){
     let betDif = minBet-account.bet;
@@ -226,7 +227,8 @@ function drawPlayBetBtns(){
   }
  
   if (!playingGame){
-    //writeBtnMsg('Reveal Card', 'View Card');
+    drawBtnImg('Reveal Card')
+    writeBtnMsg('Reveal Card', 'Rules');
   } else{ 
     drawBtnImg('Reveal Card');
     writeBtnMsg('Reveal Card', 'Assist');
@@ -238,7 +240,7 @@ function displayMessage(){
   gctx.font = Math.floor(cHeight/18)+"px TheBlacklist";
   strokeAndFillText(gctx,"Strategic Move:",cWidth/1.125,pHandYLocs);
   strokeAndFillText(gctx,getMessage(pHand.cards, pHand.value, dHand.cards),cWidth/1.125,pHandYLocs*1.2);
-  ctx.font = Math.floor(483)+"px TheBlacklist";
+  gctx.font = Math.floor(150)+"px TheBlacklist";
 }
 function drawButtons(){
   BTNctx.clearRect(cWidth/2-btnSize*2,0,btnSize*5,btncHeight);//clears previously drawn btns
@@ -255,7 +257,7 @@ function drawButtons(){
   }else if(checkingCard){
     clearTutorialBtn()
     //drawBtnImg('Reveal Card'); writeBtnMsg('Reveal Card', 'Help');
-    writeCheckingCardsMsg();
+    //writeCheckingCardsMsg();
   }else if(playingGame){
     clearTutorialBtn()
     if(strategyCard){drawBtnImg('Reveal Card'); writeBtnMsg('Reveal Card', 'Help');}
@@ -285,6 +287,10 @@ function displayBetChips(){
   for(let h = 0, numHands=pHandsArr.length; h<numHands; h++){
     drawChips(h);
   }
+}
+function viewRules(){
+  disctx.drawImage(miscImgMap.get('Rules'),cWidth*.65,cHeight/10,cWidth*.3,cHeight*.85);
+  disctx.drawImage(miscImgMap.get('CardValues'),cWidth*.025,cHeight/10,cWidth*.3,cHeight*.85);
 }
 
 function drawChips(h=0,bet=null,loc=null,cvs=bctx,disVal=true){
@@ -327,6 +333,9 @@ function displayDValue(){
   let dYPos = Math.floor(cHeight*0.03);//unncessary calculations
 
   disctx.clearRect(cWidth/2-stdFontSize, dYPos-stdFontSize, 2*stdFontSize, 1.5*stdFontSize);
+  strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+  strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+  strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   strokeAndFillText(disctx,dHand.value,cWidth/2,dYPos);
 }
 
@@ -336,6 +345,9 @@ function displayPValue(){
 
   disctx.clearRect(0,cHeight*0.9,cWidth,cHeight*0.1);
   strokeAndFillText(disctx,pHand.value,pXPos,pYPos);
+  strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+  strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+  strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
 }
 
 const pointer = {
@@ -362,6 +374,10 @@ function checkBalance(amt){
 
 const balFontSize = Math.floor(btncHeight/3);
 function displayBalance(){
+  // display Wins, Losses and Draws as Well
+  strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+  strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+  strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
   let xPos = Math.floor(cWidth*0.85) ;
   BTNctx.textAlign = 'center';
   BTNctx.font= balFontSize+'px TheBlacklist';

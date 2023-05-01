@@ -46,6 +46,9 @@ function revealDealerCard(reveal,cb=()=>{},wait=0){
           aniLib.slide(holeCard,xFin2,yLocStart,xLocStart,yLocStart,cardW,cardH,30,0,ctx,()=>{
             ctx.drawImage(exposedCard,xLocStart-xCardDif,yLocStart+yCardDif,cardW,cardH);// have to redraw image because of animation edge cases
             disctx.clearRect(0,0,cWidth,cHeight);//clears initial drawn exposed card
+            strokeAndFillText(disctx,"Wins : "+String(wins),cWidth*.95,cHeight*.05);
+            strokeAndFillText(disctx,"Losses : "+String(losses),cWidth*.95,cHeight*.1);
+            strokeAndFillText(disctx,"Draws : "+String(pushes),cWidth*.95,cHeight*.15);
             cb();
           });//end slide2
         })//end flip
