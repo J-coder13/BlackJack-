@@ -6,7 +6,7 @@
 
 ## Game Rules
 
-1)  Object of the Game The participant attemptss to beat the dealer by getting a count as close to 21 as possile, without going over 21
+1)  Object of the game: The player attempts to beat the dealer by getting a count as close to 21 as possile, without going over 21
 
 2)  It is up to player if an ace is worth 1 or 11. Face cards are 10 and any other card is its pip value.
 
